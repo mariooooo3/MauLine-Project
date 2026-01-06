@@ -6,6 +6,7 @@ This project simulates a complete Uber-like system implemented in Java, showcasi
 , **Observer**, and **Visitor**.
 It includes Riders, Drivers, a flexible Payment System, real-time notifications, statistics generation, reward management, and automated testing.
 
+
 ---
 
 ## 🏗️ **Project Architecture Overview**
