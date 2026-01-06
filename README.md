@@ -1,4 +1,4 @@
-# 🚗 UberApp – Advanced Java OOP Project
+# 🚗 MauLine – Advanced Java OOP Project
 
 This project simulates a complete Uber-like system implemented in Java, showcasing advanced Object-Oriented Programming concepts and multiple design patterns: **Strategy**
 
@@ -20,7 +20,7 @@ The project is organized into modular packages under `src/`, structured around k
 | **4** | **Payment Strategy** | [`src/PaymentStrategy`](src/PaymentStrategy) | Dynamic payment method selection using the **Strategy Pattern**. |
 | **5** | **RateUp System** | [`src/RateUpSystem`](src/RateUpSystem) | Manages rating improvements, rewards, and incentives. |
 | **6** | **Ride Types** | [`src/Rides`](src/Rides) | Different ride types: *Regular, Economic, Comfort*. |
-| **7** | **Main Application** | [`src/UberApp`](src/UberApp) | Core control logic, JSON initialization, and **JUnit** testing. |
+| **7** | **Main Application** | [`src/MauLine`](src/MauLine) | Core control logic, JSON initialization, and **JUnit** testing. |
 | **8** | **Visitor Pattern** | [`src/Visitor`](src/Visitor) | Generates statistics and notifications without modifying entity classes. |
 
 ---

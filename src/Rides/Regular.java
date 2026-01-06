@@ -3,7 +3,7 @@ package Rides;
 import Entitati.Driver;
 import Entitati.Rider;
 
-import static UberApp.Constants.*;
+import static MauLine.Constants.*;
 
 import java.util.Random;
 

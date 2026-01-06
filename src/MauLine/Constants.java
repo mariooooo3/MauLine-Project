@@ -1,4 +1,4 @@
-package UberApp;
+package MauLine;
 
 public final class Constants {
     public static final int MAX_RATE = 5;

@@ -7,7 +7,7 @@ import Exceptions.*;
 
 import java.util.Random;
 
-import static UberApp.Constants.*;
+import static MauLine.Constants.*;
 
 public abstract class Rides {
     Driver d;

@@ -5,9 +5,8 @@ import Exceptions.*;
 import Observer.RidesObserver;
 import Visitor.Visitable;
 import Visitor.Visitor;
-import Rides.Rides;
 
-import static UberApp.Constants.*;
+import static MauLine.Constants.*;
 
 import static Entitati.Rider.ct;
 

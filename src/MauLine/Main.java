@@ -1,5 +1,5 @@
 
-package UberApp;
+package MauLine;
 
 import Entitati.Driver;
 import Entitati.Rider;

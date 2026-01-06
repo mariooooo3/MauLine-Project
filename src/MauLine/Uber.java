@@ -1,5 +1,5 @@
 
-package UberApp;
+package MauLine;
 
 import Observer.RidesObserver;
 import Observer.Subject;

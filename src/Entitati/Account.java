@@ -2,7 +2,7 @@ package Entitati;
 
 import RateUpSystem.RateUpSystem;
 
-import static UberApp.Constants.*;
+import static MauLine.Constants.*;
 
 import java.util.Random;
 import java.util.Scanner;
