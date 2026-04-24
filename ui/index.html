@@ -1,0 +1,311 @@
+
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MauLine – Ride Sharing</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<!-- ── LOGIN ─────────────────────────────────────────────────────────── -->
+<div id="page-login" class="page active">
+  <div class="login-bg">
+    <div class="login-card">
+      <div class="brand"><span class="brand-icon">M</span><span class="brand-name">MauLine</span></div>
+      <p class="brand-tagline">Ride. Anywhere. Anytime.</p>
+
+      <div class="tab-switcher">
+        <button class="tab-btn active" onclick="switchTab('signin')">Sign In</button>
+        <button class="tab-btn" onclick="switchTab('signup')">Sign Up</button>
+      </div>
+
+      <!-- Sign In -->
+      <div id="tab-signin" class="tab-content active">
+        <div class="role-picker">
+          <button class="role-btn active" onclick="selectRole('rider', this)">🧍 Rider</button>
+          <button class="role-btn" onclick="selectRole('driver', this)">🚗 Driver</button>
+        </div>
+        <input id="si-username" class="input" type="text" placeholder="Username" />
+        <input id="si-password" class="input" type="password" placeholder="Password" />
+        <button class="btn-primary" onclick="doSignIn()">Sign In</button>
+        <p id="si-error" class="form-error"></p>
+      </div>
+
+      <!-- Sign Up -->
+      <div id="tab-signup" class="tab-content">
+        <div class="role-picker">
+          <button class="role-btn active" onclick="selectRoleSignup('rider', this)">🧍 Rider</button>
+          <button class="role-btn" onclick="selectRoleSignup('driver', this)">🚗 Driver</button>
+        </div>
+        <div class="input-row">
+          <input id="su-first" class="input" type="text" placeholder="First Name" />
+          <input id="su-last" class="input" type="text" placeholder="Last Name" />
+        </div>
+        <input id="su-username" class="input" type="text" placeholder="Username" />
+        <input id="su-password" class="input" type="password" placeholder="Password" />
+        <div id="su-rider-fields">
+          <input id="su-budget" class="input" type="number" placeholder="Budget (lei)" />
+          <input id="su-prefs" class="input" type="text" placeholder="Preferences (comma separated)" />
+        </div>
+        <div id="su-driver-fields" style="display:none">
+          <input id="su-car" class="input" type="text" placeholder="Car Model" />
+          <input id="su-exp" class="input" type="number" placeholder="Years of experience" />
+          <input id="su-quals" class="input" type="text" placeholder="Qualities (comma separated)" />
+        </div>
+        <button class="btn-primary" onclick="doSignUp()">Create Account</button>
+        <p id="su-error" class="form-error"></p>
+      </div>
+
+      <p class="demo-hint">Demo: <strong>user1 / pass1</strong> (rider) &nbsp;|&nbsp; <strong>driver1 / dpass1</strong> (driver)</p>
+    </div>
+  </div>
+</div>
+
+<!-- ── APP SHELL ──────────────────────────────────────────────────────── -->
+<div id="page-app" class="page">
+
+  <!-- Sidebar -->
+  <nav id="sidebar">
+    <div class="sidebar-brand"><span class="brand-icon">M</span></div>
+    <ul class="nav-links">
+      <li><button class="nav-btn active" data-page="dashboard" onclick="navigate('dashboard', this)" title="Dashboard">
+        <svg viewBox="0 0 24 24"><path d="M3 13h8V3H3v10zm0 8h8v-6H3v6zm10 0h8V11h-8v10zm0-18v6h8V3h-8z"/></svg>
+      </button></li>
+      <li><button class="nav-btn" data-page="book" onclick="navigate('book', this)" title="Book a Ride">
+        <svg viewBox="0 0 24 24"><path d="M18.92 6.01C18.72 5.42 18.16 5 17.5 5h-11c-.66 0-1.21.42-1.42 1.01L3 12v8c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-1h12v1c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-8l-2.08-5.99zM6.85 7h10.29l1.08 3.11H5.77L6.85 7zM19 17H5v-5h14v5z"/><circle cx="7.5" cy="14.5" r="1.5"/><circle cx="16.5" cy="14.5" r="1.5"/></svg>
+      </button></li>
+      <li id="nav-rides-li"><button class="nav-btn" data-page="rides" onclick="navigate('rides', this)" title="My Rides">
+        <svg viewBox="0 0 24 24"><path d="M9 11H7v2h2v-2zm4 0h-2v2h2v-2zm4 0h-2v2h2v-2zm2-7h-1V2h-2v2H8V2H6v2H5c-1.11 0-1.99.9-1.99 2L3 20c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V9h14v11z"/></svg>
+      </button></li>
+      <li><button class="nav-btn" data-page="users" onclick="navigate('users', this)" title="Users">
+        <svg viewBox="0 0 24 24"><path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/></svg>
+      </button></li>
+      <li><button class="nav-btn" data-page="stats" onclick="navigate('stats', this)" title="Statistics">
+        <svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-7 3c1.93 0 3.5 1.57 3.5 3.5S13.93 13 12 13s-3.5-1.57-3.5-3.5S10.07 6 12 6zm7 13H5v-.23c0-.62.28-1.2.76-1.58C7.47 15.82 9.64 15 12 15s4.53.82 6.24 2.19c.48.38.76.97.76 1.58V19z"/></svg>
+      </button></li>
+    </ul>
+    <div class="sidebar-bottom">
+      <button class="nav-btn" onclick="doLogout()" title="Logout">
+        <svg viewBox="0 0 24 24"><path d="M17 7l-1.41 1.41L18.17 11H8v2h10.17l-2.58 2.58L17 17l5-5zM4 5h8V3H4c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h8v-2H4V5z"/></svg>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Main content -->
+  <main id="main-content">
+
+    <!-- Header -->
+    <header id="app-header">
+      <div class="header-left">
+        <h1 id="page-title">Dashboard</h1>
+      </div>
+      <div class="header-right">
+        <div id="notif-bell" class="notif-bell" onclick="toggleNotifPanel()">
+          <svg viewBox="0 0 24 24"><path d="M12 22c1.1 0 2-.9 2-2h-4c0 1.1.9 2 2 2zm6-6v-5c0-3.07-1.63-5.64-4.5-6.32V4c0-.83-.67-1.5-1.5-1.5s-1.5.67-1.5 1.5v.68C7.64 5.36 6 7.92 6 11v5l-2 2v1h16v-1l-2-2z"/></svg>
+          <span id="notif-count" class="notif-count">0</span>
+        </div>
+        <div class="user-chip" id="user-chip">
+          <div class="user-avatar" id="user-avatar">?</div>
+          <span id="user-display-name">Guest</span>
+        </div>
+      </div>
+    </header>
+
+    <!-- Notification Panel -->
+    <div id="notif-panel" class="notif-panel hidden">
+      <h3>Notifications</h3>
+      <div id="notif-list"></div>
+    </div>
+
+    <!-- ── DASHBOARD ── -->
+    <section id="section-dashboard" class="section active">
+      <div class="stats-grid">
+        <div class="stat-card" style="--accent:#4CAF50">
+          <div class="stat-icon">🧍</div>
+          <div class="stat-info"><span class="stat-value" id="stat-riders">5</span><span class="stat-label">Total Riders</span></div>
+        </div>
+        <div class="stat-card" style="--accent:#2196F3">
+          <div class="stat-icon">🚗</div>
+          <div class="stat-info"><span class="stat-value" id="stat-drivers">5</span><span class="stat-label">Total Drivers</span></div>
+        </div>
+        <div class="stat-card" style="--accent:#FF9800">
+          <div class="stat-icon">🛣️</div>
+          <div class="stat-info"><span class="stat-value" id="stat-rides">0</span><span class="stat-label">Rides Today</span></div>
+        </div>
+        <div class="stat-card" style="--accent:#9C27B0">
+          <div class="stat-icon">💰</div>
+          <div class="stat-info"><span class="stat-value" id="stat-revenue">0 lei</span><span class="stat-label">Revenue Today</span></div>
+        </div>
+      </div>
+
+      <div class="dash-bottom">
+        <div class="card">
+          <h2 class="card-title">Recent Rides</h2>
+          <div id="recent-rides-list" class="activity-list">
+            <p class="empty-state">No rides yet. <a href="#" onclick="navigate('book', document.querySelector('[data-page=book]'))">Book one!</a></p>
+          </div>
+        </div>
+        <div class="card">
+          <h2 class="card-title">Available Drivers</h2>
+          <div id="dashboard-drivers" class="driver-mini-list"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── BOOK A RIDE ── -->
+    <section id="section-book" class="section">
+      <div class="book-flow">
+
+        <!-- Step 1 -->
+        <div id="book-step-1" class="book-step active-step">
+          <h2>Choose Your Rider</h2>
+          <div id="book-rider-grid" class="user-grid"></div>
+        </div>
+
+        <!-- Step 2 -->
+        <div id="book-step-2" class="book-step">
+          <h2>Choose a Driver</h2>
+          <div id="book-driver-grid" class="user-grid"></div>
+        </div>
+
+        <!-- Step 3 -->
+        <div id="book-step-3" class="book-step">
+          <h2>Select Ride Type</h2>
+          <div class="ride-type-cards">
+            <div class="ride-type-card" onclick="selectRideType('Economic', this)">
+              <div class="ride-type-icon">🍃</div>
+              <div class="ride-type-name">Economic</div>
+              <div class="ride-type-price">2 lei/km</div>
+              <div class="ride-type-desc">Affordable & eco-friendly. Up to 20% discount.</div>
+              <div class="ride-type-features"><span>Ride-share</span><span>Eco discount</span></div>
+            </div>
+            <div class="ride-type-card" onclick="selectRideType('Regular', this)">
+              <div class="ride-type-icon">🚗</div>
+              <div class="ride-type-name">Regular</div>
+              <div class="ride-type-price">4 lei/km</div>
+              <div class="ride-type-desc">Comfortable everyday rides.</div>
+              <div class="ride-type-features"><span>Music</span><span>AC</span><span>On-time</span></div>
+            </div>
+            <div class="ride-type-card" onclick="selectRideType('Comfort', this)">
+              <div class="ride-type-icon">💎</div>
+              <div class="ride-type-name">Comfort</div>
+              <div class="ride-type-price">6 lei/km</div>
+              <div class="ride-type-desc">Premium experience every time.</div>
+              <div class="ride-type-features"><span>WiFi</span><span>Drinks</span><span>Snacks</span><span>Priority</span></div>
+            </div>
+          </div>
+          <button class="btn-primary" style="margin-top:1.5rem" onclick="goBookStep(4)">Continue →</button>
+        </div>
+
+        <!-- Step 4: Payment -->
+        <div id="book-step-4" class="book-step">
+          <h2>Payment Method</h2>
+          <div class="payment-grid">
+            <div class="payment-card" onclick="selectPayment('Cash', this)">
+              <div class="pay-icon">💵</div>
+              <div class="pay-name">Cash</div>
+            </div>
+            <div class="payment-card" onclick="selectPayment('CreditCard', this)">
+              <div class="pay-icon">💳</div>
+              <div class="pay-name">Credit Card</div>
+            </div>
+            <div class="payment-card" onclick="selectPayment('Revolut', this)">
+              <div class="pay-icon">📱</div>
+              <div class="pay-name">Revolut</div>
+            </div>
+            <div class="payment-card" onclick="selectPayment('Voucher', this)">
+              <div class="pay-icon">🎟️</div>
+              <div class="pay-name">Voucher</div>
+            </div>
+          </div>
+          <div id="book-summary" class="book-summary"></div>
+          <button class="btn-primary" id="confirm-ride-btn" onclick="confirmRide()" disabled>Confirm Ride</button>
+        </div>
+
+      </div>
+
+      <!-- Step indicators -->
+      <div class="step-indicators">
+        <div class="step-dot active" id="dot-1">1</div>
+        <div class="step-line"></div>
+        <div class="step-dot" id="dot-2">2</div>
+        <div class="step-line"></div>
+        <div class="step-dot" id="dot-3">3</div>
+        <div class="step-line"></div>
+        <div class="step-dot" id="dot-4">4</div>
+      </div>
+    </section>
+
+    <!-- ── RIDE ANIMATION ── -->
+    <section id="section-rideanim" class="section">
+      <div class="ride-anim-wrap">
+        <div class="ride-anim-card">
+          <div class="ride-anim-icon" id="anim-car">🚗</div>
+          <h2 id="anim-status">Finding your driver…</h2>
+          <div class="anim-progress-bar"><div id="anim-progress" class="anim-progress-fill"></div></div>
+          <div id="anim-details" class="anim-details"></div>
+          <button id="anim-done-btn" class="btn-primary" style="display:none" onclick="finishRide()">Done ✓</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── MY RIDES ── -->
+    <section id="section-rides" class="section">
+      <div id="rides-list" class="rides-full-list"></div>
+    </section>
+
+    <!-- ── USERS ── -->
+    <section id="section-users" class="section">
+      <div class="users-tabs">
+        <button class="utab active" onclick="switchUsersTab('riders', this)">Riders</button>
+        <button class="utab" onclick="switchUsersTab('drivers', this)">Drivers</button>
+      </div>
+      <div id="users-riders-panel" class="users-panel active">
+        <div id="users-riders-grid" class="user-cards-grid"></div>
+      </div>
+      <div id="users-drivers-panel" class="users-panel">
+        <div id="users-drivers-grid" class="user-cards-grid"></div>
+      </div>
+    </section>
+
+    <!-- ── STATS ── -->
+    <section id="section-stats" class="section">
+      <div class="stats-panels">
+        <div class="card">
+          <h2 class="card-title">Financial Overview</h2>
+          <div id="financial-list" class="financial-list"></div>
+        </div>
+        <div class="card">
+          <h2 class="card-title">Driver Leaderboard</h2>
+          <div id="leaderboard-list" class="leaderboard-list"></div>
+        </div>
+        <div class="card full-width">
+          <h2 class="card-title">Earnings Chart</h2>
+          <div id="chart-wrap" class="chart-wrap">
+            <canvas id="earn-chart"></canvas>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<!-- ── RATING MODAL ── -->
+<div id="rating-modal" class="modal-overlay hidden">
+  <div class="modal-card">
+    <h2>Rate Your Ride</h2>
+    <p id="rate-subtitle">How was your experience?</p>
+    <div class="rating-criteria" id="rating-criteria-list"></div>
+    <button class="btn-primary" onclick="submitRating()">Submit Rating</button>
+  </div>
+</div>
+
+<!-- ── TOAST ── -->
+<div id="toast" class="toast hidden"></div>
+
+<script src="app.js"></script>
+</body>
+</html>

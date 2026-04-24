@@ -1,0 +1,151 @@
+{
+  "riders": [
+    {
+      "username": "user1",
+      "password": "pass1",
+      "lastName": "Marin",
+      "firstName": "Sorin",
+      "ridePreferences": [
+        "Calm",
+        "Fast",
+        "ElectricCar",
+        "Friendly"
+      ],
+      "budget": 150
+    },
+    {
+      "username": "user2",
+      "password": "pass2",
+      "lastName": "Pop",
+      "firstName": "Ana",
+      "ridePreferences": [
+        "PetFriendly",
+        "Friendly",
+        "Clean",
+        "Fast"
+      ],
+      "budget": 300
+    },
+    {
+      "username": "user3",
+      "password": "pass3",
+      "lastName": "Luca",
+      "firstName": "Bianca",
+      "ridePreferences": [
+        "Calm",
+        "Clean",
+        "Confort",
+        "Silent"
+      ],
+      "budget": 80
+    },
+    {
+      "username": "user4",
+      "password": "pass4",
+      "lastName": "Dima",
+      "firstName": "Tudor",
+      "ridePreferences": [
+        "Modern",
+        "Fast",
+        "Sport",
+        "Music"
+      ],
+      "budget": 200
+    },
+    {
+      "username": "user5",
+      "password": "pass5",
+      "lastName": "Matei",
+      "firstName": "Denisa",
+      "ridePreferences": [
+        "Luxury",
+        "Calm",
+        "Professional",
+        "Clean"
+      ],
+      "budget": 500
+    }
+  ],
+  "drivers": [
+    {
+      "username": "driver1",
+      "password": "dpass1",
+      "lastName": "Ionescu",
+      "firstName": "Adrian",
+      "experience": 4,
+      "qualities": [
+        "Calm",
+        "ElectricCar",
+        "Confort",
+        "Clean",
+        "Friendly"
+      ],
+      "isAvailable": true,
+      "carModel": "Tesla Model 3"
+    },
+    {
+      "username": "driver2",
+      "password": "dpass2",
+      "lastName": "Popescu",
+      "firstName": "Mihai",
+      "experience": 5,
+      "qualities": [
+        "Fast",
+        "Modern",
+        "Sport",
+        "Music",
+        "Friendly"
+      ],
+      "isAvailable": true,
+      "carModel": "BMW M3"
+    },
+    {
+      "username": "driver3",
+      "password": "dpass3",
+      "lastName": "Stan",
+      "firstName": "Maria",
+      "experience": 3,
+      "qualities": [
+        "Clean",
+        "Friendly",
+        "PetFriendly",
+        "Calm",
+        "Confort"
+      ],
+      "isAvailable": true,
+      "carModel": "Dacia Spring"
+    },
+    {
+      "username": "driver4",
+      "password": "dpass4",
+      "lastName": "Vlad",
+      "firstName": "Ioan",
+      "experience": 4,
+      "qualities": [
+        "PetFriendly",
+        "Calm",
+        "Silent",
+        "ElectricCar",
+        "Friendly"
+      ],
+      "isAvailable": true,
+      "carModel": "Toyota Prius"
+    },
+    {
+      "username": "driver5",
+      "password": "dpass5",
+      "lastName": "Radu",
+      "firstName": "Elena",
+      "experience": 5,
+      "qualities": [
+        "Luxury",
+        "Calm",
+        "Professional",
+        "Clean",
+        "Confort"
+      ],
+      "isAvailable": false,
+      "carModel": "Mercedes S-Class"
+    }
+  ]
+}
